@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        color: #333;
+      }
+      #content {
+        font-size: 20px;
+        color: blue;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        display: inline-block;
+        transition: all 0.5s ease-in-out;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      #container {
+        margin-top: 20px;
+      }
+      p {
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      .slide {
+        animation: slideIn 1s ease-in-out;
+      }
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .shake {
+        animation: shake 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript DOM Manipulation</h1>
+    <p id="content">This text will change when you click the button.</p>
+    <br />
+    <button onclick="toggleText()">Toggle Text</button>
+    <button onclick="toggleStyle()">Toggle Style</button>
+    <button onclick="addElement()">Add Element</button>
+    <button onclick="removeElement()">Remove Element</button>
+    <button onclick="slideInText()">Slide In Effect</button>
+    <button onclick="shakeElement()">Shake Effect</button>
+
+    <div id="container"></div>
+
+    <script>
+      let textChanged = false;
+      let styleChanged = false;
+
+      // Function to toggle text content
+      function toggleText() {
+        let content = document.getElementById("content");
+        if (!textChanged) {
+          content.innerText = "The text has been changed!";
+        } else {
+          content.innerText =
+            "This text will change when you click the button.";
+        }
+        textChanged = !textChanged;
+      }
+
+      // Function to toggle style (color and font size)
+      function toggleStyle() {
+        let content = document.getElementById("content");
+        if (!styleChanged) {
+          content.style.color = "red";
+          content.style.fontSize = "25px";
+        } else {
+          content.style.color = "blue";
+          content.style.fontSize = "20px";
+        }
+        styleChanged = !styleChanged;
+      }
+
+      // Function to add a new paragraph dynamically
+      function addElement() {
+        let newPara = document.createElement("p");
+        newPara.innerText = "This is a new paragraph added dynamically.";
+        document.getElementById("container").appendChild(newPara);
+      }
+
+      // Function to remove the last added paragraph
+      function removeElement() {
+        let container = document.getElementById("container");
+        if (container.lastChild) {
+          container.removeChild(container.lastChild);
+        }
+      }
+
+      // Function to apply a slide-in animation effect
+      function slideInText() {
+        document.getElementById("content").classList.add("slide");
+        setTimeout(
+          () => document.getElementById("content").classList.remove("slide"),
+          1000
+        );
+      }
+
+      // Function to apply a shake animation effect
+      function shakeElement() {
+        document.getElementById("content").classList.add("shake");
+        setTimeout(
+          () => document.getElementById("content").classList.remove("shake"),
+          300
+        );
+      }
+    </script>
+  </body>
+</html>
